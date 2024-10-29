@@ -12,8 +12,8 @@ const Login = () => {
   const login_res = useSelector((state) => state?.auth?.login)
   const formik = useFormik({
     initialValues: {
+      phoneNumber: "",
       password: "",
-      phoneNumber: ""
     },
     onSubmit: (vals) => {
       dispatch(login(vals))
@@ -23,13 +23,14 @@ const Login = () => {
   useEffect(() => {
     if (login_res?.suc) {
       console.log(login_res);
-      localStorage.setItem('token', login_res?.data?.token);
-      localStorage.setItem('sessionId', login_res?.data?.token);
+      localStorage.setItem('token', login_res?.token);
+      localStorage.setItem('sessionId', login_res?.token);
       let user = {
-         fname: login_res?.data?.name,
+         name: login_res?.data?.name,
          email: login_res?.data?.email,
-         role : login_res?.data?.role,
-         isSuperAdmin: login_res?.data?.isSuperAdmin ? true : false
+         phoneNumber: login_res?.data?.phoneNumber,
+         isSuperAdmin: login_res?.data?.isSuperAdmin,
+         role: login_res?.data?.role,
       }
       localStorage.setItem('user', JSON.stringify(user));
       toast.success("Login Successful.")
@@ -52,7 +53,7 @@ const Login = () => {
       <div className="simple-page-wrap">
         <div className="simple-page-form animated flipInY" id="login-form">
           <div className="simple-page-logo animated swing">
-            <span>Triggin Login</span>
+            <span>Triggin</span>
           </div>
           <h4 className="form-title m-b-xl text-center">Sign In With Your Account</h4>
           <form onSubmit={formik.handleSubmit}>

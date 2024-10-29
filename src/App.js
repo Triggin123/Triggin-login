@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
+import Users from './components/Users';
 
 function App() {
   return (
@@ -17,9 +18,7 @@ function App() {
           <Route path='/' element={<Login />} />
           <Route element={<NavBar />}>
             <Route path='/home' element={<Home />} />
-            {/* <Route path='/groups' element={<Groups />} />
             <Route path='/users' element={<Users />} />
-            <Route path='/questions' element={<Questions />} /> */}
           </Route>
         </Routes>
       </BrowserRouter>

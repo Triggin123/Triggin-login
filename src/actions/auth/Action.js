@@ -4,7 +4,6 @@ export const Login = ActionTypesFactory("Auth", "Login");
 export const SignUp = ActionTypesFactory("Auth", "SignUp");
 export const ForgotPassword = ActionTypesFactory("Auth", "ForgotPassword");
 
-
 export const login = (payload) => {
   return {
     type: Login.REQUEST,

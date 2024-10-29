@@ -26,7 +26,7 @@ const NavBar = () => {
             </Link>
           </Nav.Link>
           {isSuperAdmin() &&
-          <Nav.Link>  
+          <Nav.Link>
             <Link to='/users'><i className="bi bi-box"></i>
               <span className='ml-1'>Users</span>
             </Link>

@@ -7,7 +7,7 @@ export const RESET_ON_LOGOUT = "RESET_ON_LOGOUT";
 export const getUserName = () => {
   if (localStorage?.getItem("user")) {
     let user = JSON.parse(localStorage?.getItem("user"));
-    return user?.fname ? user?.fname : ""
+    return user?.name
   }
   return "";
 };
@@ -15,14 +15,14 @@ export const getUserName = () => {
 export const getFirstName = () => {
   if (localStorage?.getItem("user")) {
     let user = JSON.parse(localStorage?.getItem("user"));
-    return user.fname || "";
+    return user.name;
   }
   return "";
 };
 export const getLastName = () => {
   if (localStorage?.getItem("user")) {
     let user = JSON.parse(localStorage?.getItem("user"));
-    return user.lname || "";
+    return user.lname;
   }
   return "";
 };
