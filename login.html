@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Categories</title>
+    <link rel="stylesheet" href="login.css">
+    
+</head>
+<body>
+    
+
+<div class="container">
+    <div id="loginSection">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="loginBtn">Login</button>
+    </div>
+    
+    <div id="welcomeMessage" class="hidden">
+        <h2>Welcome!</h2>
+        <table>
+            <tr>
+                <td>
+                    <!-- Puff Category -->
+                    <img src="https://media.istockphoto.com/id/1289369949/photo/indian-khari-or-kharee-or-salty-puff-pastry-snacks-in-wooden-bowl.jpg?s=1024x1024&w=is&k=20&c=kui6ZwdWhJyWB0KSwbttOd6KCvck4v9eAzPCstWCFeY=" width="270" height="200" alt="">
+                </td>
+                <td>
+                    <!-- Toast Category -->
+                    <img src="https://media.istockphoto.com/id/1004827186/photo/sliced-bread-on-white.jpg?s=612x612&w=0&k=20&c=gMoMq9cxekB4iNS7lOToPwm6SuXh5YVu-aodVpw9C34=" width="270" height="27S0" alt="" >
+                </td>
+                <td>
+                    <!-- Bread Category -->
+                    <img src="https://media.istockphoto.com/id/1365586441/photo/slice-of-delicious-toasted-bread-on-white.jpg?s=612x612&w=0&k=20&c=cHBbQ-4nVeLdWgktX7K56f8HFBclZBCLSBvmUdZ8e-8=" width="270" height="200" alt="" >
+                </td>
+            </tr>
+            <tr>
+                <td><button id="puffsBtn">Puffs</button></td>
+                <td><button id="breadsBtn">Breads</button></td>
+                <td><button id="toastsBtn">Toasts</button></td>
+            </tr>
+        </table>
+        
+        <div class="cart" id="cart">
+            <h3>Your Cart</h3>
+            <ul id="cartItems"></ul>
+            <button id="bookOrderBtn" class="hidden">Book Order</button>
+        </div>
+
+        <div id="puffsList" class="item-list">
+            <h3>Puffs Types</h3>
+            <div class="item">
+                <img src="https://www.bing.com/th?id=OIP.invLHwJlTpKaxESTuY9RjAHaHa&w=146&h=146&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2" alt="Paneer Puff"> 
+                Paneer Puff - ₹30.00 <button onclick="addToCart('Paneer Puff', 30)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="https://www.bing.com/th?id=OIP.pGzz9szevFepPO_TiE3zrQHaHa&w=146&h=146&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2"> 
+                Vegetable Puff - ₹25.00 <button onclick="addToCart('Vegetable Puff', 25)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="https://th.bing.com/th?q=Chicken+Roll+Puff&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=1.5&pid=InlineBlock&mkt=en-IN&cc=IN&setlang=en&adlt=moderate&t=1&mw=247" alt="Potato Puff"> 
+                Potato Puff - ₹20.00 <button onclick="addToCart('Potato Puff', 20)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div id="breadsList" class="item-list">
+            <h3>Breads Types</h3>
+            <div class="item">
+                <img src="https://th.bing.com/th?id=OIP.WH5p5eA7pDWmloWP3vY7TwHaFj&w=288&h=216&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2" alt="White Bread"> 
+                White Bread - ₹15.00 <button onclick="addToCart('White Bread', 15)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="https://media.gettyimages.com/id/1388036699/photo/freshly-baked-goodness.jpg?s=612x612&w=0&k=20&c=GYhzdvmgRpuA-cXWi6W2MksR3DludqkakwEjSlIkSZk=" alt="Whole Wheat Bread"> 
+                Whole Wheat Bread - ₹20.00 <button onclick="addToCart('Whole Wheat Bread', 20)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="https://media.gettyimages.com/id/1376024188/photo/littlebourne-kent-england-uk-27-october-2021-fresh-sourdough-bread-cooling-on-a-wire-rack.jpg?s=612x612&w=0&k=20&c=2FhIjAOu75Pygj_isisM4k9vnSMMsEQG0zYj_26qi7k=" alt="Sourdough"> 
+                Sourdough - ₹25.00 <button onclick="addToCart('Sourdough', 25)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div id="toastsList" class="item-list">
+            <h3>Toasts Types</h3>
+            <div class="item">
+                <img src="https://th.bing.com/th/id/OIP.Obsx3iB09IqtxiQkrTGeowHaFj?w=170&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Butter Toast"> 
+                Butter Toast - ₹10.00 <button onclick="addToCart('Butter Toast', 10)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="https://th.bing.com/th/id/OIP.v-38WQic9dsgrC2Fri-drwHaHa?w=145&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Cheese Toast"> 
+                Cheese Toast - ₹15.00 <button onclick="addToCart('Cheese Toast', 15)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="https://th.bing.com/th/id/OIP.Obsx3iB09IqtxiQkrTGeowHaFj?w=170&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Garlic Toast"> 
+                Garlic Toast - ₹12.00 <button onclick="addToCart('Garlic Toast', 12)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="login.js"></script>
+
+</body>
+</html>
