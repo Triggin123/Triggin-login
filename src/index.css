@@ -1,0 +1,151 @@
+@import url("bootstrap/dist/css/bootstrap.min.css");
+@import url("bootstrap-icons/font/bootstrap-icons.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-family: Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif; */
+}
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+img,
+ol,
+ul,
+li,
+form,
+label,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+footer,
+header,
+nav,
+section,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+.mr-3 {
+  margin-right: 1rem;
+}
+.mr-2 {
+  margin-right: 0.5rem;
+}
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: #f7f8fb !important;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #6a6c6f;
+  font-size: 14px;
+  line-height: 1.42;
+}
+
+.side-nav {
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+.nav-link,
+.nav-link a {
+  display: flex !important;
+  justify-content: left;
+  align-items: center;
+  color: #16365f !important;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600 !important;
+  text-decoration: none;
+}
+
+.nav-title {
+  color: #16365f !important;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 600 !important;
+  padding: 1rem;
+}
+.ml-1 {
+  margin-left: 0.5rem;
+}
+
+.headline-2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #16365f;
+}
+
+header {
+  padding: 1rem 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-right: 2rem;
+}
+
+main {
+  padding: 0 0.5rem;
+  padding-right: 2rem;
+}
+
+#collasible-nav-dropdown {
+  padding: 0 !important;
+}
+
+.muted {
+  color: #6b859e;
+}
+
+/* ===== Custom CSS ===== */
+
+.isCard {
+  background-color: #cccccc;
+}
+.wrapper {
+  padding: 15px;
+  background: #ffffff;
+  margin-bottom: 1.5rem;
+  -webkit-box-shadow: 0 1px 2px #ccc;
+  box-shadow: 0 1px 2px #ccc;
+}
+
+.errorMsg {
+  color: red;
+  font-size: 14px;
+}
+
+.loadBtn {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.offcanvas-body {
+  overflow-y: auto;
+  height: 84vh;
+}
+
+.company .offcanvas.offcanvas-end {
+  width: 35%;
+}
