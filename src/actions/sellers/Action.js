@@ -6,7 +6,6 @@ export const SaveSeller = ActionTypesFactory("Sellers", "Save");
 export const SearchSeller = ActionTypesFactory("Sellers", "Search");
 
 export const getSellers = (payload) => {
-  alert(JSON.stringify(payload))
   return {
     type: GetSellers.REQUEST,
     payload,
