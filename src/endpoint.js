@@ -1,5 +1,5 @@
 import axios from "axios";
-export const BASE_URL = "https://node-application-ervx.onrender.com";
+export const BASE_URL = "http://localhost:8001" || "https://node-application-ervx.onrender.com";
 const instance = axios.create({
   baseURL: BASE_URL + "/v1/triggin",
 });
@@ -8,8 +8,7 @@ instance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
     if (localStorage.getItem("token")) {
-      config.headers.accessToken = localStorage.getItem("token");
-      config.headers.sessionId = localStorage.getItem("sessionId");
+      config.headers.accesstoken = `Bearer ${localStorage.getItem("token")}`;
     }
     return config;
   },

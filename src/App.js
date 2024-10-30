@@ -5,10 +5,11 @@ import NavBar from './components/NavBar';
 import Login from './components/Login';
 import './App.css';
 import { ToastContainer } from 'react-toastify';
-
+import Users from './components/Users';
+import Buyers from './components/Buyers';
+import Sellers from './components/Sellers';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
-import Users from './components/Users';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
           <Route element={<NavBar />}>
             <Route path='/home' element={<Home />} />
             <Route path='/users' element={<Users />} />
+            <Route path='/buyers' element={<Buyers />} />
+            <Route path='/sellers' element={<Sellers />} />
           </Route>
         </Routes>
       </BrowserRouter>

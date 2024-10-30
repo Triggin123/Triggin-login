@@ -24,7 +24,6 @@ const Login = () => {
     if (login_res?.suc) {
       console.log(login_res);
       localStorage.setItem('token', login_res?.token);
-      localStorage.setItem('sessionId', login_res?.token);
       let user = {
          name: login_res?.data?.name,
          email: login_res?.data?.email,

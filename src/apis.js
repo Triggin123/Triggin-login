@@ -3,5 +3,15 @@ export const APIS = {
   user: "/user/all",
   userDetails: "/user/fetch",
   saveUser:"/signup",
-  dashboardCount: "/dashboard/counts"
+  dashboardCount: "/dashboard/counts",
+
+  saveBuyer:"/buyer/add",
+  fetchBuyer: "/buyer/fetch",
+  allBuyers: "/buyer/getAll",
+  searchBuyer:"/buyer/search",
+
+  saveSeller:"/seller/add",
+  fetchSeller: "/seller/fetch",
+  allSellers: "/seller/getAll",
+  searchSeller:"/seller/search"
 }
