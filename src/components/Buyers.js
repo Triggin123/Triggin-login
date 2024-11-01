@@ -221,8 +221,7 @@ const Buyers = (props) => {
                 <Input2
                   formik={formikAdd}
                   name="businessName"
-                  disabled={formikAdd?.values?._id}
-                  label={"Email"}
+                  label={"Business name"}
                   placeholder="Enter Businessname"
                 />
               </div>

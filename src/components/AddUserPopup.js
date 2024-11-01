@@ -30,7 +30,7 @@ const AddUserPopup = (props) => {
     validationSchema: validationSchema,
     onSubmit: (vals) => {
       let reqdata = {
-        name: vals?.fname+" "+vals.email.lname,
+        name: vals?.lname ? vals.fname+" "+vals.lname : vals?.fname,
         email: vals?.email,
         phoneNumber: vals?.phoneNumber
       }
@@ -47,7 +47,7 @@ const AddUserPopup = (props) => {
   useEffect(() => {
     if (selectedUserDetails?._id) {
       formik.setValues({
-        name: selectedUserDetails?.fname,
+        name: selectedUserDetails?.fname ,
         phoneNumber:selectedUserDetails?.phoneNumber,
         email: selectedUserDetails?.email,
       });

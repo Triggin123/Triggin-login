@@ -19,4 +19,7 @@ export const APIS = {
   fetchProductsOwn: "/product/all",
   fetchProductsSupplier: "/product/supplier/all",
   detailsProduct: "/product/details",
+
+  catalogue:"/seller/fromBuyer",
+  catalogue_products:"/product/supplier/all"
 }

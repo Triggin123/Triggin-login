@@ -11,6 +11,7 @@ import Sellers from './components/Sellers';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
 import Products from './components/Products';
+import Catalogue from './components/Catalogue';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path='/buyers' element={<Buyers />} />
             <Route path='/sellers' element={<Sellers />} />
             <Route path='/products' element={<Products />} />
+            <Route path='/catalogue' element={<Catalogue />} />
           </Route>
         </Routes>
       </BrowserRouter>

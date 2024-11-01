@@ -22,7 +22,6 @@ const Login = () => {
 
   useEffect(() => {
     if (login_res?.suc) {
-      console.log(login_res);
       localStorage.setItem('token', login_res?.token);
       let user = {
          name: login_res?.data?.name,
@@ -45,7 +44,6 @@ const Login = () => {
         type: LoginType.RESET
       })
     }
-    // eslint-disable-next-line
   }, [login_res])
   return (
     <div className='simple-page'>
