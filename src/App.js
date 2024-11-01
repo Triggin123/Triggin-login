@@ -10,6 +10,7 @@ import Buyers from './components/Buyers';
 import Sellers from './components/Sellers';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
+import Products from './components/Products';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path='/users' element={<Users />} />
             <Route path='/buyers' element={<Buyers />} />
             <Route path='/sellers' element={<Sellers />} />
+            <Route path='/products' element={<Products />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -12,7 +12,8 @@ const NavBar = () => {
     "/questions": "Questions",
     "/users": "Users",
     "/buyers": "Buyers",
-    "/sellers": "Sellers"
+    "/sellers": "Sellers",
+    "/products":"Products"
   }
   return (
     <Row>
@@ -43,6 +44,11 @@ const NavBar = () => {
               <Nav.Link>
                 <Link to='/sellers'><i className="bi bi-box"></i>
                   <span className='ml-1'>Sellers</span>
+                </Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link to='/products'><i className="bi bi-box"></i>
+                  <span className='ml-1'>Products</span>
                 </Link>
               </Nav.Link>
             </>

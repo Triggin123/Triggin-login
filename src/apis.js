@@ -13,5 +13,10 @@ export const APIS = {
   saveSeller:"/seller/add",
   fetchSeller: "/seller/fetch",
   allSellers: "/seller/getAll",
-  searchSeller:"/seller/search"
+  searchSeller:"/seller/search",
+
+  saveProduct:"/product/save",
+  fetchProductsOwn: "/product/all",
+  fetchProductsSupplier: "/product/supplier/all",
+  detailsProduct: "/product/details",
 }

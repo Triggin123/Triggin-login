@@ -3,12 +3,14 @@ import { authWatcher } from "./actions/auth";
 import { userWatcher } from "./actions/users";
 import { buyerWatcher } from "./actions/buyers";
 import { sellerWatcher } from "./actions/sellers";
+import { productWatcher } from "./actions/products";
 
 export function* rootSagas() {
   yield all([
     authWatcher(),
     userWatcher(),
     buyerWatcher(),
-    sellerWatcher()
+    sellerWatcher(),
+    productWatcher()
   ]);
 }
