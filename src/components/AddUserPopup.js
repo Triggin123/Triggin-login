@@ -1,24 +1,21 @@
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from 'yup';
 import { Input2 } from "./form-components/Input";
-import { getUser, saveUser, GetUser } from "../actions/users";
+import { saveUser, GetUser } from "../actions/users";
 
 const validationSchema = yup.object().shape({
   fname: yup.string().required("First name is required"),
   lname: yup.string().required("Last name is required"),
   email: yup.string().email("Invalid email format").required("Email is required"),
-  phoneNumber: yup.number()
-          .typeError("Please enter number value only"),
+  phoneNumber: yup.string().required("Phone number is required"),
 })
+
 const AddUserPopup = (props) => {
-  const { width } = props
+  const { width, selected } = props
   const dispatch = useDispatch()
   const save = useSelector(state => state?.group?.save);
-
-  const selectedUserDetails = useSelector(usr => usr?.user?.detail?.data);
-
 
   const formik = useFormik({
     initialValues: {
@@ -30,7 +27,8 @@ const AddUserPopup = (props) => {
     validationSchema: validationSchema,
     onSubmit: (vals) => {
       let reqdata = {
-        name: vals?.lname ? vals.fname+" "+vals.lname : vals?.fname,
+        fname: vals?.fname,
+        lname: vals?.lname,
         email: vals?.email,
         phoneNumber: vals?.phoneNumber
       }
@@ -39,20 +37,16 @@ const AddUserPopup = (props) => {
   })
 
   useEffect(() => {
-    if (props.selected?._id) {
-      dispatch(getUser({phoneNumber:props.selected?.phoneNumber}));
-    }
-  }, [props.selected]);
-
-  useEffect(() => {
-    if (selectedUserDetails?._id) {
+    if (selected?._id) {
       formik.setValues({
-        name: selectedUserDetails?.fname ,
-        phoneNumber:selectedUserDetails?.phoneNumber,
-        email: selectedUserDetails?.email,
+        _id:selected?._id,
+        fname: selected?.fname,
+        lname: selected?.lname,
+        phoneNumber:selected?.phoneNumber,
+        email: selected?.email,
       });
     }
-  }, [selectedUserDetails]);
+  }, [selected]);
 
 
   return <div>
@@ -94,7 +88,6 @@ const AddUserPopup = (props) => {
                 formik={formik}
                 name="email"
                 label={"Email"}
-                disabled={selectedUserDetails?._id}
                 placeholder="Enter email"
               />
             </div>
@@ -103,14 +96,13 @@ const AddUserPopup = (props) => {
                 formik={formik}
                 name="phoneNumber"
                 label={"Mobile"}
-                disabled={selectedUserDetails?._id}
                 placeholder="Enter mobile"
               />
             </div>
           </div>
         </div>
         <div className="offcanvas-footer p-3">
-          <button type="submit" className={`btn btn-primary w-100 ${save?.loading ? "loadBtn" : ""}`}>Save & Submit</button>
+          <button type="submit" className={`btn btn-primary w-100 ${save?.loading ? "loadBtn" : ""}`}>{selected ? "Update" :"Save"}</button>
         </div>
       </form>
     </div>

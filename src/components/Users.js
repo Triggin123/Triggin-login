@@ -2,12 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DataTable from "../common/DataTable";
 import TableHead from "../common/TableHead"
-import { GetUsers, getUsers, SaveUser} from "../actions/users"
+import { GetUsers, getUsers, SaveUser } from "../actions/users"
 import moment from 'moment'
 import { toast } from 'react-toastify';
 import AddUserPopup from './AddUserPopup';
 import LazyLoading from '../actions/loaders/LazyLoading'
+import DotsLoader from '../actions/loaders/DotsLoader'
 
+/**
+ * @author Praveen Varma
+ * @description Home page
+ * @returns 
+ */
 const Users = () => {
   const dispatch = useDispatch();
   const users = useSelector(state => state?.user?.all);
@@ -17,18 +23,19 @@ const Users = () => {
   const [selected, setSelected] = useState({});
 
   let [page, setPage] = useState(1);
-  const [totalRecords, setTotalRecords] = useState(11);
+  let [pageSize, setPageSize] = useState(10);
+  const [totalRecords, setTotalRecords] = useState(0);
 
   useEffect(() => {
     setRecords([]);
-    dispatch(getUsers({page:page}))
+    dispatch(getUsers({ page: page,  pageSize: pageSize }))
   }, []);
 
   useEffect(() => {
     if (save?.success) {
       setRecords([]);
       setPage(1);
-      dispatch(getUsers({page:1}))
+      dispatch(getUsers({ page: 1, pageSize:10 }))
       setOpen(false)
       toast.success(save?.msg)
       dispatch({
@@ -37,7 +44,7 @@ const Users = () => {
       if (selected?._id) {
         setSelected({})
       }
-    } else if(save?.success === false){
+    } else if (save?.success === false) {
       toast.error(save?.msg);
       dispatch({
         type: SaveUser.RESET
@@ -51,19 +58,19 @@ const Users = () => {
     })
   }, []);
 
-  useEffect(() =>{
-    if (!users.loading) {
+  useEffect(() => {
+    if (users && !users.loading) {
       let finalData = users && users.data && users.data.length > 0 ? users.data : [];
       setRecords([...records, ...finalData]);
       setTotalRecords(users && users.totalRecords ? users.totalRecords : 0);
     }
-  },[users])
+  }, [users])
 
   const columns = [
     {
       title: "Name",
       cell: (row) => {
-        return <span>{row?.name}{" "}</span>
+        return <span>{row?.lname ? row?.fname+" "+row?.lname : row?.fname}</span>
       }
     },
     {
@@ -73,7 +80,7 @@ const Users = () => {
       }
     },
     {
-      title: "Mobile",
+      title: "Phone number",
       cell: (row) => {
         return <span>{row?.phoneNumber}</span>
       }
@@ -99,13 +106,13 @@ const Users = () => {
     {
       title: "Modified By",
       cell: (row) => {
-        return <span>{row?.modifiedBy?.fname}{" "}{row?.modifiedBy?.lname}</span>
+        return <span>{row?.updatedBy?.fname}{" "}{row?.updatedBy?.lname}</span>
       }
     },
     {
       title: "Status",
       cell: (row) => {
-        return <span>{row?.is_active ? "Active" : "In active"}</span>
+        return <span>{row?.active === true ? "Active" : "In active"}</span>
       }
     },
     {
@@ -119,28 +126,34 @@ const Users = () => {
       }
     },
   ]
+
   return (
     <div className='wrapper'>
-      <TableHead addText={"Users"} setOpen={setOpen} count={records ? records.length: 0} totalCount={totalRecords ? totalRecords :0}/>
-      <hr className='widget-separator'></hr>
-      <DataTable loading={users?.loading} data={users?.data || []} columns={columns} />
-      {open && (
-        <AddUserPopup width={500} setOpen={setOpen} selected={selected} clearSelected={() => {
-          setSelected({})
-        }} />
-      )}
-      <LazyLoading
-        loading={users?.loading}
-        totalRecords={totalRecords}
-        data={records? records:[]}
-        isLastPage={records?.length >= totalRecords}
-        onPagination={() => {
-          if (records?.length <= totalRecords) {
-            setPage(p => p + 1);
-            dispatch(getUsers({page:page+1}))
-          }
-        }}
-      />
+      {users?.loading ?
+        <DotsLoader /> :
+        <>
+          <TableHead addText={"Users"} setOpen={setOpen} count={records ? records.length : 0} totalRecords={totalRecords ? totalRecords : 0} />
+          <hr className='widget-separator'></hr>
+          <DataTable loading={users?.loading} data={users?.data || []} columns={columns} />
+          {open && (
+            <AddUserPopup width={500} setOpen={setOpen} selected={selected} clearSelected={() => {
+              setSelected({})
+            }} />
+          )}
+          <LazyLoading
+            loading={users?.loading}
+            totalRecords={totalRecords}
+            data={records ? records : []}
+            isLastPage={records?.length >= totalRecords}
+            onPagination={() => {
+              if (records?.length <= totalRecords) {
+                setPage(p => p + 1);
+                dispatch(getUsers({ page: page + 1, pageSize }))
+              }
+            }}
+          />
+        </>
+      }
     </div>
   );
 };

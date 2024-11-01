@@ -4,7 +4,7 @@ import { sagaFunctions } from "../../utils";
 import { GetUser, GetUsers, SaveUser } from "./Action";
 
 const get_users = (req) => {
-  return sagaFunctions(GetUsers, "post", apis.user + `/${req.payload.page}/10`, req.payload)();
+  return sagaFunctions(GetUsers, "post", apis.user + `/${req.payload.page}/${req.payload.pageSize || 10}`, req.payload)();
 };
 
 const get_user = (req) => {

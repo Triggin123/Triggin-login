@@ -6,6 +6,11 @@ import { toast } from 'react-toastify';
 import { login, Login as LoginType } from '../actions/auth';
 import Input from './form-components/Input';
 
+/**
+ * @author Praveen Varma
+ * @description Login call
+ * @returns 
+ */
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -24,7 +29,9 @@ const Login = () => {
     if (login_res?.suc) {
       localStorage.setItem('token', login_res?.token);
       let user = {
-         name: login_res?.data?.name,
+         _id:login_res?.data?._id,
+         fname: login_res?.data?.fname,
+         lname:login_res?.data?.lname,
          email: login_res?.data?.email,
          phoneNumber: login_res?.data?.phoneNumber,
          isSuperAdmin: login_res?.data?.isSuperAdmin,
@@ -36,15 +43,14 @@ const Login = () => {
       dispatch({
         type: LoginType.RESET
       })
-    }
-
-    if (login_res?.suc === false) {
+    }else if (login_res?.suc === false) {
       toast.error(login_res?.msg)
       dispatch({
         type: LoginType.RESET
       })
     }
   }, [login_res])
+
   return (
     <div className='simple-page'>
       <div className="simple-page-wrap">
@@ -59,7 +65,6 @@ const Login = () => {
             <button type="submit" name="Submit" value="Login" className={`btn btn-primary ${login_res?.loading ? "loadBtn" : ""}`}>Login</button>
           </form>
         </div >
-
         <div className="simple-page-footer">
           <p><span className='link'>Forgot Your Password ?</span></p>
           <p>
