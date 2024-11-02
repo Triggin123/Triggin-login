@@ -102,7 +102,7 @@ export const sagaFunctions = (action_type, method, api, data, headers) => {
         payload: err?.response?.data
           ? err?.response?.data
           : {
-            message: "Something went wrong!",
+            msg: "Something went wrong!",
           },
       });
     }
@@ -130,7 +130,7 @@ export const ReducerFunctions = (ActionType, initialState) => {
           loading: false,
         };
       case ActionType.FAILED:
-        let errMsg = action?.payload?.message;
+        let errMsg = action?.payload?.msg;
         return {
           ...state,
           ...action.payload,
@@ -141,16 +141,16 @@ export const ReducerFunctions = (ActionType, initialState) => {
       case ActionType.RESET: {
         return {
           loading: false,
-          success: "",
-          message: "",
+          suc: "",
+          msg: "",
         };
       }
 
       case RESET_ON_LOGOUT: {
         return {
           loading: false,
-          success: "",
-          message: "",
+          suc: "",
+          msg: "",
         };
       }
 

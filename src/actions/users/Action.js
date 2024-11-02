@@ -3,6 +3,7 @@ import { ActionTypesFactory } from "../../utils";
 export const GetUsers = ActionTypesFactory("Users", "POST");
 export const GetUser = ActionTypesFactory("Get", "User");
 export const SaveUser = ActionTypesFactory("User", "Save");
+export const UpdateUser = ActionTypesFactory("User", "Update");
 
 export const getUsers = (payload) => {
   return {
@@ -21,6 +22,13 @@ export const saveUser = (payload) => {
 export const getUser = (payload) => {
   return {
     type: GetUser.REQUEST,
+    payload,
+  };
+};
+
+export const updateUser = (payload) => {
+  return {
+    type: UpdateUser.REQUEST,
     payload,
   };
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DataTable from "../common/DataTable";
 import TableHead from "../common/TableHead"
-import { GetUsers, getUsers, SaveUser } from "../actions/users"
+import { GetUsers, getUsers, SaveUser, UpdateUser } from "../actions/users"
 import moment from 'moment'
 import { toast } from 'react-toastify';
 import AddUserPopup from './AddUserPopup';
@@ -26,13 +26,15 @@ const Users = () => {
   let [pageSize, setPageSize] = useState(10);
   const [totalRecords, setTotalRecords] = useState(0);
 
+  const update = useSelector(state => state?.user?.update);
+
   useEffect(() => {
     setRecords([]);
     dispatch(getUsers({ page: page,  pageSize: pageSize }))
   }, []);
 
   useEffect(() => {
-    if (save?.success) {
+    if (save?.suc) {
       setRecords([]);
       setPage(1);
       dispatch(getUsers({ page: 1, pageSize:10 }))
@@ -44,13 +46,33 @@ const Users = () => {
       if (selected?._id) {
         setSelected({})
       }
-    } else if (save?.success === false) {
+    } else if (save?.suc === false) {
       toast.error(save?.msg);
       dispatch({
         type: SaveUser.RESET
       })
     }
   }, [save]);
+
+  useEffect(() =>{
+    if(update){
+      if(update?.suc){
+        setOpen(false);
+        toast.success(update?.msg);
+        dispatch({
+          type: UpdateUser.RESET
+        })
+        setRecords([]);
+        setPage(1);
+        dispatch(getUsers({ page: 1, pageSize:10 }))
+        if (selected?._id) {
+          setSelected({})
+        }
+      }else if(update?.suc === false){
+        toast.error(update?.msg || "Error");
+      }
+    }
+  }, [update])
 
   React.useEffect(() => {
     return () => dispatch({
@@ -83,6 +105,12 @@ const Users = () => {
       title: "Phone number",
       cell: (row) => {
         return <span>{row?.phoneNumber}</span>
+      }
+    },
+    {
+      title: "Business name",
+      cell: (row) => {
+        return <span>{row?.businessName}</span>
       }
     },
     {
