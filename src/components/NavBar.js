@@ -70,7 +70,9 @@ const NavBar = () => {
           </div>
           <div className='d-flex align-items-center'>
             <span className='mr-3'>
-              <i className="bi bi-bell"></i>
+              <i className="bi bi-bell" onClick={(e) =>{
+                navigate("/cart")
+              }}></i>
             </span>
             <Navbar.Collapse className='show' id="basic-nav-dropdown">
               <Nav className="me-auto">

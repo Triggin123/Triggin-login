@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { getCatalogues, GetCatalogues, getCatalogueProducts, CatalogueProducts } from "../actions/catalogue"
 import Card from 'react-bootstrap/Card';
 
@@ -12,7 +13,8 @@ const Catalogue = (props) => {
   const save = useSelector(state => state?.product?.save)
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState({});
-
+  
+  const navigate = useNavigate()
   let [page, setPage] = useState(1);
   const [totalRecords, setTotalRecords] = useState(11);
 
@@ -63,7 +65,8 @@ const Catalogue = (props) => {
               }
               }>
                 <Card.Body>
-                  <Card.Title>{itm?.userId?.name}</Card.Title>
+                  <Card.Title>{itm?.userId?.fname}{" "}{itm?.userId?.lname || ""}</Card.Title>
+                  <Card.Text>{itm?.userId?.businessName || ""}</Card.Text>
                 </Card.Body>
               </Card>
             )
@@ -78,13 +81,14 @@ const Catalogue = (props) => {
             {products?.map((prd) => {
               return (
                 <>
-                  <Card style={{ width: '18rem' }} onClick={() => {
+                  <Card style={{ width: '18rem' }} onClick={(e) => {
+                    navigate("/product/details/"+prd?._id)
                   }
                   }>
                     <Card.Body>
                       <Card.Title>{prd?.name}</Card.Title>
                       <Card.Text>
-                        Price {prd?.landing_price}
+                        Price {prd?.base_price || prd?.landing_price}
                       </Card.Text>
                     </Card.Body>
                   </Card>

@@ -22,5 +22,7 @@ export const APIS = {
   detailsProduct: "/product/details",
 
   catalogue:"/seller/fromBuyer",
-  catalogue_products:"/product/supplier/all"
+  catalogue_products:"/product/supplier/all",
+
+  cartAll: "/cart/all"
 }

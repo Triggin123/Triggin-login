@@ -7,7 +7,7 @@ const get_products_own = (req) => {
   return sagaFunctions(GetProductsOwn, "post", apis.fetchProductsOwn + `/${req.payload.page}/${req.payload.pageSize || 10}`, req.payload)();
 };
 const get_products_sullpier = (req) => {
-  return sagaFunctions(GetProductsSupplier, "post", apis.fetchProductsSupplier + `/${req.payload.page}/${req.payload.pageSize}`, req.payload)();
+  return sagaFunctions(GetProductsSupplier, "post", apis.fetchProductsSupplier + `/${req.payload.page}/${req.payload.pageSize || 100}`, req.payload)();
 };
 
 const get_product = (req) => {
