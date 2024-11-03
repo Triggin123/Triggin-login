@@ -6,6 +6,9 @@ import { get_seller_reducer, get_sellers_reducer, save_seller_reducer, search_se
 import { get_products_own_reducer, get_products_supplier_reducer, save_product_reducer, details_product_reducer} from "./actions/products/Reducer";
 import { get_catalogue_reducer, get_catalogue_products_reducer } from "./actions/catalogue/Reducer";
 import { get_cart_products_reducer } from "./actions/carts/Reducer";
+import { get_industries_reducer, save_industries_reducer , save_categories_reducer, save_subcategories_reducer,
+  get_categories_based_industry_reducer, get_industry_group_reducer,
+get_subcategories_based_category_reducer} from "./actions/master/Reducer";
 
 export default combineReducers({
   auth: combineReducers({
@@ -41,6 +44,15 @@ export default combineReducers({
   }),
   cart: combineReducers({
     all: get_cart_products_reducer,
+  }),
+  master: combineReducers({
+    industry_all: get_industries_reducer,
+    industry_save: save_industries_reducer,
+    category_save: save_categories_reducer,
+    subcategory_save: save_subcategories_reducer,
+    category_based_industry: get_categories_based_industry_reducer,
+    industry_group: get_industry_group_reducer,
+    subcategory_based_category: get_subcategories_based_category_reducer
   }),
 
 });

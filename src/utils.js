@@ -15,14 +15,14 @@ export const getUserName = () => {
 export const getFirstName = () => {
   if (localStorage?.getItem("user")) {
     let user = JSON.parse(localStorage?.getItem("user"));
-    return user.fame;
+    return user?.fame || "";
   }
   return "";
 };
 export const getLastName = () => {
   if (localStorage?.getItem("user")) {
     let user = JSON.parse(localStorage?.getItem("user"));
-    return user.lname;
+    return user?.lname || "";
   }
   return "";
 };
@@ -30,7 +30,15 @@ export const getLastName = () => {
 export const getUserEmail = () => {
   if (localStorage?.getItem("user")) {
     let user = JSON.parse(localStorage?.getItem("user"));
-    return user.email;
+    return user?.email || "";
+  }
+  return "";
+};
+
+export const getUserPhoneNumeber = () => {
+  if (localStorage?.getItem("user")) {
+    let user = JSON.parse(localStorage?.getItem("user"));
+    return user?.phoneNumber || "";
   }
   return "";
 };
@@ -38,7 +46,7 @@ export const getUserEmail = () => {
 export const isSuperAdmin = () => {
   if (localStorage?.getItem("user")) {
     let user = JSON.parse(localStorage?.getItem("user"));
-    if (user.isSuperAdmin) {
+    if (user?.isSuperAdmin) {
       return true;
     }
     return false;
@@ -49,7 +57,15 @@ export const isSuperAdmin = () => {
 export const getUserType = () => {
   if (localStorage?.getItem("user")) {
     let user = JSON.parse(localStorage?.getItem("user"));
-    return user.user_type;
+    return user?.role;
+  }
+  return ""
+};
+
+export const getIndustryId = () => {
+  if (localStorage?.getItem("user")) {
+    let user = JSON.parse(localStorage?.getItem("user"));
+    return user?.industryTypeId || null;
   }
   return ""
 };

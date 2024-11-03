@@ -14,6 +14,9 @@ import Products from './components/Products';
 import Catalogue from './components/Catalogue';
 import ProductDetails from './components/ProductDetails';
 import Cart from './components/Cart';
+import Industry from './components/Industry';
+import Category from './components/Category';
+import SubCategory from './components/SubCategory';
 
 function App() {
   return (
@@ -30,6 +33,9 @@ function App() {
             <Route path='/catalogue' element={<Catalogue />} />
             <Route path='/product/details/:productId' element={<ProductDetails />} />
             <Route path='/cart' element={<Cart />} />
+            <Route path='/industries' element={<Industry />} />
+            <Route path='/categories' element={<Category />} />
+            <Route path='/subcategories' element={<SubCategory />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -4,8 +4,10 @@ import DataTable from "../common/DataTable";
 import TableHead from "../common/TableHead"
 import { GetUsers, getUsers, SaveUser, UpdateUser } from "../actions/users"
 import moment from 'moment'
+import Select from "./form-components/Select";
 import { toast } from 'react-toastify';
 import AddUserPopup from './AddUserPopup';
+import { getIndustries, GetIndustries } from "../actions/master";
 import LazyLoading from '../actions/loaders/LazyLoading'
 import DotsLoader from '../actions/loaders/DotsLoader'
 
@@ -27,11 +29,30 @@ const Users = () => {
   const [totalRecords, setTotalRecords] = useState(0);
 
   const update = useSelector(state => state?.user?.update);
+  const industry_all = useSelector(state => state?.master?.industry_all);
+  const [industryList, setIndustryList] = useState([])
 
   useEffect(() => {
     setRecords([]);
     dispatch(getUsers({ page: page,  pageSize: pageSize }))
   }, []);
+
+  useEffect(() => {
+    setRecords([]);
+    dispatch(getIndustries({ page: page, pageSize: 100 }))
+}, []);
+
+useEffect(() => {
+  if (!industry_all.loading) {
+      let list = industry_all?.data?.map(itm => {
+          return {
+              label: itm.name,
+              value: itm._id
+          }
+      })
+      setIndustryList(list);
+  }
+}, [industry_all])
 
   useEffect(() => {
     if (save?.suc) {
@@ -114,6 +135,12 @@ const Users = () => {
       }
     },
     {
+      title: "Industry name",
+      cell: (row) => {
+        return <span>{row?.industryTypeId?.name || ""}</span>
+      }
+    },
+    {
       title: "Created Date",
       cell: (row) => {
         return <span>{moment(row?.createdDate).format("DD-MM-YYYY HH:mm")}</span>
@@ -164,7 +191,7 @@ const Users = () => {
           <hr className='widget-separator'></hr>
           <DataTable loading={users?.loading} data={users?.data || []} columns={columns} />
           {open && (
-            <AddUserPopup width={500} setOpen={setOpen} selected={selected} clearSelected={() => {
+            <AddUserPopup width={500} setOpen={setOpen} industry_list ={industryList} selected={selected} clearSelected={() => {
               setSelected({})
             }} />
           )}

@@ -29,11 +29,30 @@ const NavBar = () => {
             </Link>
           </Nav.Link>
           {isSuperAdmin() &&
+          <>
             <Nav.Link>
               <Link to='/users'><i className="bi bi-box"></i>
                 <span className='ml-1'>Users</span>
               </Link>
-            </Nav.Link>}
+            </Nav.Link>
+            <Nav.Link>
+              <Link to='/industries'><i className="bi bi-box"></i>
+                <span className='ml-1'>Industries</span>
+              </Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link to='/categories'><i className="bi bi-box"></i>
+                <span className='ml-1'>Categories</span>
+              </Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link to='/subcategories'><i className="bi bi-box"></i>
+                <span className='ml-1'>Sub Categories</span>
+              </Link>
+            </Nav.Link>
+            
+            </>
+          }
           {!isSuperAdmin() ?
             <>
               <Nav.Link>

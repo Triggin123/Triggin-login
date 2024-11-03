@@ -1,8 +1,9 @@
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from 'yup';
 import { Input2 } from "./form-components/Input";
+import Select from "./form-components/Select";
 import { saveUser, GetUser, updateUser } from "../actions/users";
 
 const validationSchema = yup.object().shape({
@@ -11,12 +12,14 @@ const validationSchema = yup.object().shape({
   email: yup.string().email("Invalid email format").required("Email is required"),
   phoneNumber: yup.string().required("Phone number is required"),
   businessName: yup.string().required("Business name is required"),
+  industryTypeId: yup.string().required("Industry name is required"),
 })
 
 const AddUserPopup = (props) => {
-  const { width, selected } = props
+  const { width, selected, industry_list } = props
   const dispatch = useDispatch()
   const save = useSelector(state => state?.user?.save);
+  const [ind_list, setIndlist] = useState(industry_list)
 
   const formik = useFormik({
     initialValues: {
@@ -24,7 +27,8 @@ const AddUserPopup = (props) => {
       lname: "",
       email: "",
       phoneNumber: "",
-      businessName:""
+      businessName:"",
+      industryTypeId:""
     },
     validationSchema: validationSchema,
     onSubmit: (vals) => {
@@ -33,7 +37,8 @@ const AddUserPopup = (props) => {
         lname: vals?.lname,
         email: vals?.email,
         phoneNumber: vals?.phoneNumber,
-        businessName: vals?.businessName
+        businessName: vals?.businessName,
+        industryTypeId: vals?.industryTypeId || null
       }
       if(selected && selected?._id){
         reqdata._id=selected?._id;
@@ -52,7 +57,8 @@ const AddUserPopup = (props) => {
         lname: selected?.lname,
         phoneNumber:selected?.phoneNumber,
         email: selected?.email,
-        businessName: selected?.businessName
+        businessName: selected?.businessName,
+        industryTypeId: selected?.industryTypeId
       });
     }
   }, [selected]);
@@ -119,6 +125,14 @@ const AddUserPopup = (props) => {
                 name="businessName"
                 label={"Business Name"}
                 placeholder="Enter business name"
+              />
+            </div>
+            <div className='w-50'>
+              <Select
+                formik={formik}
+                label={"Industry name"}
+                options={ind_list ? [{ label: "-----Select------", value: "" }, ...ind_list] : []}
+                name="industryTypeId"
               />
             </div>
           </div>

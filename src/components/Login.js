@@ -36,6 +36,7 @@ const Login = () => {
          phoneNumber: login_res?.data?.phoneNumber,
          isSuperAdmin: login_res?.data?.isSuperAdmin,
          role: login_res?.data?.role,
+         industryTypeId: login_res?.data?.industryTypeId
       }
       localStorage.setItem('user', JSON.stringify(user));
       toast.success("Login Successful.")

@@ -24,5 +24,15 @@ export const APIS = {
   catalogue:"/seller/fromBuyer",
   catalogue_products:"/product/supplier/all",
 
-  cartAll: "/cart/all"
+  cartAll: "/cart/all",
+
+  industry_all: "/master/industry/list",
+  industry_save: "/master/industry/save",
+
+  category_save: "/category/save",
+  subcategory_save: "/subcategory/save",
+
+  category_basedon_industry: "/category/industryType",
+  subcategory_basedon_category: "/subcategory/category",
+  industry_group: "/master/industry/group"
 }

@@ -6,6 +6,7 @@ import { sellerWatcher } from "./actions/sellers";
 import { productWatcher } from "./actions/products";
 import { catalogueWatcher } from "./actions/catalogue";
 import { cartWatcher } from "./actions/carts";
+import { mastertWatcher } from "./actions/master";
 
 export function* rootSagas() {
   yield all([
@@ -15,6 +16,7 @@ export function* rootSagas() {
     sellerWatcher(),
     productWatcher(),
     catalogueWatcher(),
-    cartWatcher()
+    cartWatcher(),
+    mastertWatcher()
   ]);
 }
