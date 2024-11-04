@@ -24,7 +24,9 @@ export const APIS = {
   catalogue:"/seller/fromBuyer",
   catalogue_products:"/product/supplier/all",
 
-  cartAll: "/cart/all",
+  cartAll: "/cart/getAll",
+  cartAdd: "/cart/add",
+  cartDelete: "/cart/delete",
 
   industry_all: "/master/industry/list",
   industry_save: "/master/industry/save",

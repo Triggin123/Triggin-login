@@ -7,7 +7,7 @@ const get_catalogues = (req) => {
   return sagaFunctions(GetCatalogues, "post", apis.catalogue , req.payload)();
 };
 const get_catalogue_products = (req) => {
-  return sagaFunctions(CatalogueProducts, "post", apis.catalogue_products+"/1/1000" , req.payload)();
+  return sagaFunctions(CatalogueProducts, "post", apis.catalogue_products , req.payload)();
 };
 
 

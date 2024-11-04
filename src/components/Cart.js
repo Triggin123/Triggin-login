@@ -1,66 +1,65 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getProduct, GetProduct } from "../actions/products";
+import { getCartProducts, deleteCartProducts } from "../actions/carts";
 import DotsLoader from '../actions/loaders/DotsLoader';
 import { useNavigate } from 'react-router-dom';
+import { getLoggedinId } from '../utils';
 
 const Cart = (props) => {
     const dispatch = useDispatch();
-    const details = useSelector(state => state?.product?.detail);
-    const [productDetails, setProductDetails] = useState("");
+    const all_cart_prods = useSelector(state => state?.cart?.all);
+    const delte_cart_prods = useSelector(state => state?.cart?.delete);
+
     const navigate = useNavigate()
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        /* if (productId) {
-            dispatch(getProduct({ _id: productId }));
-        } */
+        dispatch(getCartProducts({ userId: getLoggedinId() }));
     }, []);
 
-    /* React.useEffect(() => {
-        return () => dispatch({
-            type: GetProduct.RESET
-        })
-    }, []); */
 
+    useEffect(() => {
+        setProducts([]);
+        if (all_cart_prods?.suc) {
+            setProducts(all_cart_prods?.data || []);
+        }
+    }, [all_cart_prods])
+
+
+    useEffect(() => {
+        if (delte_cart_prods?.suc) {
+            dispatch(getCartProducts({ userId: getLoggedinId() }));
+        }
+    }, [delte_cart_prods])
+    
 
 
     return (
         <>
-            {details?.loading ?
-                <DotsLoader /> :
-                <>
-                    {productDetails &&
-                        <div className="offcanvas-body">
-                            <div className='d-flex gap1'>
-                                <div className='w-50'>
-                                    Product name
-                                </div>
-                                <div className='w-50'>
-                                    {productDetails?.name}
-                                </div>
-                            </div>
-                            <div className='d-flex gap1'>
-                                <div className='w-50'>
-                                    Price
-                                </div>
-                                <div className='w-50'>
-                                    {productDetails?.base_price}
-                                </div>
-                            </div>
-                            <div className='d-flex gap1'>
-                                <div className='w-15'>
-                                    <button type="submit" className={`btn btn-primary w-100`}> Add to cart</button>
-                                </div>
-                                <div className='w-15'>
-                                    <button type="button" className={`btn btn-primary w-100`} onClick={() => {
-                                        navigate("/catalogue")
-                                    }}>Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </>
+            <h3>Cart Products</h3><br />
+            {products && products.length > 0 &&
+                products?.map((prd) => {
+                    return (
+                        <pre>
+                            Name: {prd?.name}
+                            Price: {prd?.landing_price}<hr />
+                            <button type="submit" className={`btn btn-primary w-100`}
+                            onClick={() =>{
+                                dispatch(deleteCartProducts({
+                                    quantity:1,
+                                    productId: prd?._id,
+                                    userId: getLoggedinId(),
+                                    sellerId: prd?.userId
+                                }))
+                            }}
+                            > Delete Item</button>
+                        </pre>
+                    )
+                })
+            }
+            {products && products.length > 0 &&
+                <button type="submit" className={`btn btn-primary w-100`}> Plcae order</button>
             }
         </>
     )

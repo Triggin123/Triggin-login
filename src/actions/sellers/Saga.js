@@ -4,7 +4,7 @@ import { sagaFunctions } from "../../utils";
 import { GetSeller, GetSellers, SaveSeller, SearchSeller } from "./Action";
 
 const get_sellers = (req) => {
-  return sagaFunctions(GetSellers, "post", apis.allSellers + `/${req.payload.page}/10`, req.payload)();
+  return sagaFunctions(GetSellers, "post", apis.allSellers, req.payload)();
 };
 
 const get_seller = (req) => {

@@ -12,6 +12,14 @@ export const getUserName = () => {
   return "";
 };
 
+export const getLoggedinId = () => {
+  if (localStorage?.getItem("user")) {
+    let user = JSON.parse(localStorage?.getItem("user"));
+    return user?._id || user?.id
+  }
+  return "";
+};
+
 export const getFirstName = () => {
   if (localStorage?.getItem("user")) {
     let user = JSON.parse(localStorage?.getItem("user"));

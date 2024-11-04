@@ -10,6 +10,7 @@ import { useFormik } from "formik";
 import * as yup from 'yup';
 import { Input2 } from "./form-components/Input";
 import DotsLoader from '../actions/loaders/DotsLoader';
+import { getIndustryId } from '../utils';
 
 const validationBuyyerSearch = yup.object().shape({
   phoneNumber: yup.string().required("Phonenumber is required"),
@@ -134,12 +135,14 @@ const Buyers = (props) => {
       email: "",
       fname: "",
       lname:"",
-      _id: null
+      _id: null,
+      industryTypeId:""
     },
     validationSchema : validationBuyyerAdd,
     onSubmit: (vals) => {
       let reqdata = {
-        ...vals
+        ...vals,
+        industryTypeId: getIndustryId() || null
       }
       dispatch(saveBuyer(reqdata));
     }
@@ -149,25 +152,25 @@ const Buyers = (props) => {
     {
       title: "Name",
       cell: (row) => {
-        return <span>{row?.buyerId?.fname}{" "}{row?.buyerId?.lname || ""}</span>
+        return <span>{row?.fname}{" "}{row?.lname || ""}</span>
       }
     },
     {
       title: "Email",
       cell: (row) => {
-        return <span>{row?.buyerId?.email}</span>
+        return <span>{row?.email}</span>
       }
     },
     {
       title: "Mobile",
       cell: (row) => {
-        return <span>{row?.buyerId?.phoneNumber}</span>
+        return <span>{row?.phoneNumber}</span>
       }
     },
     {
       title: "Business name",
       cell: (row) => {
-        return <span>{row?.buyerId?.businessName}</span>
+        return <span>{row?.businessName}</span>
       }
     },
     {
@@ -179,7 +182,7 @@ const Buyers = (props) => {
     {
       title: "Status",
       cell: (row) => {
-        return <span>{row?.buyerId?.active ? "Active" : "In active"}</span>
+        return <span>{row?.active ? "Active" : "In active"}</span>
       }
     },
     {
@@ -312,7 +315,7 @@ const Buyers = (props) => {
           {buyers?.loading ?
             <DotsLoader /> :
             <>
-              <TableHead addText={""} count={records ? records.length : 0} totalRecords={totalRecords ? totalRecords : 0} />
+              <TableHead addText={""} count={records ? records.length : 0} />
               <hr className='widget-separator'></hr>
               <DataTable loading={buyers?.loading} data={buyers?.data || []} columns={columns} />
               <LazyLoading

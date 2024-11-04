@@ -42,14 +42,14 @@ const Products = (props) => {
 
   useEffect(() => {
     setRecords([]);
-    dispatch(getProductsOwn({ page: page, pageSize: 10 }))
+    dispatch(getProductsOwn({ page: page, pageSize: 20 }))
   }, []);
 
   useEffect(() => {
     if (save?.suc) {
       setRecords([]);
       setPage(1);
-      dispatch(getProductsOwn({ page: 1, pageSize: 10 }))
+      dispatch(getProductsOwn({ page: 1, pageSize: 20 }))
       toast.success(save?.msg)
       setShowAddBtn(true);
       dispatch({

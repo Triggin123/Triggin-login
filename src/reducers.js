@@ -5,7 +5,7 @@ import { get_buyer_reducer, get_buyers_reducer, save_buyer_reducer, search_buyer
 import { get_seller_reducer, get_sellers_reducer, save_seller_reducer, search_seller_reducer} from "./actions/sellers/Reducer";
 import { get_products_own_reducer, get_products_supplier_reducer, save_product_reducer, details_product_reducer} from "./actions/products/Reducer";
 import { get_catalogue_reducer, get_catalogue_products_reducer } from "./actions/catalogue/Reducer";
-import { get_cart_products_reducer } from "./actions/carts/Reducer";
+import { get_cart_products_reducer, add_cart_products_reducer, del_cart_products_reducer } from "./actions/carts/Reducer";
 import { get_industries_reducer, save_industries_reducer , save_categories_reducer, save_subcategories_reducer,
   get_categories_based_industry_reducer, get_industry_group_reducer,
 get_subcategories_based_category_reducer} from "./actions/master/Reducer";
@@ -44,6 +44,8 @@ export default combineReducers({
   }),
   cart: combineReducers({
     all: get_cart_products_reducer,
+    add: add_cart_products_reducer,
+    delete: del_cart_products_reducer
   }),
   master: combineReducers({
     industry_all: get_industries_reducer,

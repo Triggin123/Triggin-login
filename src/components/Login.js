@@ -40,7 +40,11 @@ const Login = () => {
       }
       localStorage.setItem('user', JSON.stringify(user));
       toast.success("Login Successful.")
-      navigate("/home")
+      if(login_res?.data?.landing && login_res?.data?.landing === "catalogue"){
+        navigate("/catalogue")
+      }else{
+        navigate("/home")
+      }
       dispatch({
         type: LoginType.RESET
       })
