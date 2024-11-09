@@ -36,6 +36,7 @@ const Cart = (props) => {
             dispatch({type: GetCartProducts.RESET})
             dispatch({type: AddCartProducts.RESET})
             dispatch({type: PlaceOrder.RESET})
+            navigate("/orders")
         } else if (save_order?.suc === false) {
             toast.success(save_order?.msg);
         }
