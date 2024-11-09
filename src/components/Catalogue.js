@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getCatalogues, GetCatalogues, getCatalogueProducts, CatalogueProducts } from "../actions/catalogue"
 
-import { addCartProducts } from "../actions/carts"
+import { AddCartProducts, addCartProducts } from "../actions/carts"
 import Card from 'react-bootstrap/Card';
 import { getLoggedinId } from '../utils';
+import Select from "./form-components/Select";
+import { toast } from 'react-toastify';
 
 const Catalogue = (props) => {
   const dispatch = useDispatch();
@@ -65,11 +67,15 @@ const Catalogue = (props) => {
   }, []);
 
   useEffect(() =>{
-
     if(cart_add_redux){
-      
+        if(cart_add_redux?.suc ===true){
+          dispatch({type: AddCartProducts.RESET})
+          toast.success(cart_add_redux?.msg)
+        }else  if(cart_add_redux?.suc === false){
+          dispatch({type: AddCartProducts.RESET})
+          toast.error(cart_add_redux?.msg)
+        }
     }
-
   }, [cart_add_redux])
 
   return (
@@ -124,14 +130,22 @@ const Catalogue = (props) => {
             {products?.map((prd) => {
               return (
                 <>
-                  <Card style={{ width: '18rem' }} onClick={(e) => {
-                    navigate("/product/details/" + prd?._id)
-                  }
-                  }>
+                  <Card style={{ width: '18rem' }}>
                     <Card.Body>
-                      <Card.Title>{prd?.name}</Card.Title>
+                      <Card.Title onClick={(e) => {
+                        navigate("/product/details/" + prd?._id)
+                      }
+                      }>{prd?.name}</Card.Title>
                       <Card.Text>
                         Price {prd?.base_price || prd?.landing_price} {"INR"}
+                        <select onSelect={(e) => alert(e?.target?.value)}>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                        </select>
                       </Card.Text>
                     </Card.Body>
                   </Card>

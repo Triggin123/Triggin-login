@@ -75,6 +75,11 @@ const NavBar = () => {
                   <span className='ml-1'>Catalogue</span>
                 </Link>
               </Nav.Link>
+              <Nav.Link>
+                <Link to='/orders'><i className="bi bi-box"></i>
+                  <span className='ml-1'>Orders</span>
+                </Link>
+              </Nav.Link>
             </>
             : ""
           }

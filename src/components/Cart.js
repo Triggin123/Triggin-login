@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getCartProducts, deleteCartProducts } from "../actions/carts";
+import { getCartProducts, deleteCartProducts, DeleteCartProducts, GetCartProducts, AddCartProducts ,addCartProducts } from "../actions/carts";
 import DotsLoader from '../actions/loaders/DotsLoader';
 import { useNavigate } from 'react-router-dom';
 import { getLoggedinId } from '../utils';
+import { toast } from 'react-toastify';
+import { PlaceOrder, placeOrder } from "../actions/order"
 
 const Cart = (props) => {
     const dispatch = useDispatch();
     const all_cart_prods = useSelector(state => state?.cart?.all);
     const delte_cart_prods = useSelector(state => state?.cart?.delete);
+
+    const save_order = useSelector(state => state?.order?.save);
 
     const navigate = useNavigate()
     const [products, setProducts] = useState([]);
@@ -26,12 +30,49 @@ const Cart = (props) => {
         }
     }, [all_cart_prods])
 
+    useEffect(() => {
+        if (save_order?.suc) {
+            toast.success("Order Placed");
+            dispatch({type: GetCartProducts.RESET})
+            dispatch({type: AddCartProducts.RESET})
+            dispatch({type: PlaceOrder.RESET})
+        } else if (save_order?.suc === false) {
+            toast.success(save_order?.msg);
+        }
+    }, [save_order])
+
 
     useEffect(() => {
-        if (delte_cart_prods?.suc) {
-            dispatch(getCartProducts({ userId: getLoggedinId() }));
+        if (delte_cart_prods) {
+            if (delte_cart_prods?.suc) {
+                toast.success(delte_cart_prods?.msg)
+                dispatch({
+                    type: DeleteCartProducts.RESET
+                  })
+                dispatch(getCartProducts({ userId: getLoggedinId() }));
+            } else if (delte_cart_prods?.suc === false) {
+                toast.error("Product not deleted")
+                dispatch({
+                    type: DeleteCartProducts.RESET
+                  })
+            }
         }
     }, [delte_cart_prods])
+
+
+    function saveOrder(data){
+        let seller_id= products?.map(itm => itm?.userId);
+        let total = products?.map((itm) => itm?.landing_price);
+        total = total.reduce((partialSum, a) => Number(partialSum) + Number(a), 0);
+        let payload = {
+            userId: getLoggedinId(),
+            sellerId: seller_id && seller_id?.length >0 ?seller_id[0] : null,
+            products: products,
+            total,
+            currency: "INR"
+        }
+        dispatch(placeOrder(payload));
+    }
     
 
 
@@ -59,7 +100,7 @@ const Cart = (props) => {
                 })
             }
             {products && products.length > 0 &&
-                <button type="submit" className={`btn btn-primary w-100`}> Plcae order</button>
+                <button type="submit" className={`btn btn-primary w-100`} onClick={(e) => saveOrder()}> Place order</button>
             }
         </>
     )

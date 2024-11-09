@@ -36,5 +36,9 @@ export const APIS = {
 
   category_basedon_industry: "/category/industryType",
   subcategory_basedon_category: "/subcategory/category",
-  industry_group: "/master/industry/group"
+  industry_group: "/master/industry/group",
+
+  order_all:"/order/list",
+  place_order:"/order/place",
+  get_order_details:"/order/details"
 }

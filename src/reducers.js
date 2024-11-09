@@ -10,6 +10,8 @@ import { get_industries_reducer, save_industries_reducer , save_categories_reduc
   get_categories_based_industry_reducer, get_industry_group_reducer,
 get_subcategories_based_category_reducer} from "./actions/master/Reducer";
 
+import { place_order_reducer, get_oeders_reducer, get_order_details_reducer } from "./actions/order/Reducer";
+
 export default combineReducers({
   auth: combineReducers({
     login: login_reducer
@@ -55,6 +57,11 @@ export default combineReducers({
     category_based_industry: get_categories_based_industry_reducer,
     industry_group: get_industry_group_reducer,
     subcategory_based_category: get_subcategories_based_category_reducer
+  }),
+  order: combineReducers({
+    save: place_order_reducer,
+    all: get_oeders_reducer,
+    details: get_order_details_reducer,
   }),
 
 });
