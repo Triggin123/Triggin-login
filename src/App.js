@@ -18,6 +18,7 @@ import Industry from './components/Industry';
 import Category from './components/Category';
 import SubCategory from './components/SubCategory';
 import Orders from './components/Orders';
+import OrderDetails from './components/OrderDetails';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
             <Route path='/industries' element={<Industry />} />
             <Route path='/categories' element={<Category />} />
             <Route path='/subcategories' element={<SubCategory />} />
+            <Route path='/orders/:orderId' element={<OrderDetails />} />
             <Route path='/orders' element={<Orders />} />
           </Route>
         </Routes>

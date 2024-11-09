@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DataTable from "../common/DataTable";
 import TableHead from "../common/TableHead"
+import { useNavigate } from 'react-router-dom';
 import { getOrders, GetOrders } from "../actions/order"
 import moment from 'moment'
 import { toast } from 'react-toastify';
@@ -14,7 +15,7 @@ const Orders = (props) => {
   const [records, setRecords] = useState([])
   const [selected, setSelected] = useState({});
   const [totalRecords, setTotalRecords] = useState(0);
-
+  const navigate = useNavigate()
   const [tabSel ,setTabSel] = useState("p");
 
   let [page, setPage] = useState(1);
@@ -29,6 +30,7 @@ const Orders = (props) => {
       type: GetOrders.RESET
     })
   }, []);
+  
 
   useEffect(() => {
     if (!orders_redux.loading) {
@@ -41,7 +43,7 @@ const Orders = (props) => {
 
   const columns = [
     {
-      title: "Order Nmber",
+      title: "Order Number",
       cell: (row) => {
         return <span>{row?.orderNum}</span>
       }
@@ -68,7 +70,9 @@ const Orders = (props) => {
       title: "Actions",
       cell: (row) => {
         return <>
-          <span className="btn btn-dark mr-2" onClick={() => { setSelected(row); }}>
+          <span className="btn btn-dark mr-2" onClick={(e) => { 
+            navigate("/orders/"+row?._id)
+          }}>
             <i className="bi bi-pencil-square"></i>
           </span>
         </>
